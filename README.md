@@ -30,15 +30,16 @@ def read_root():
     - Test your app locally:
         Start the development server with Uvicorn:
 
-```uvicorn main:app --reload```
+```uvicorn main:app --reload --host [your_ip_address] --port 8000```
 
         Open your browser and visit http://localhost:8000 to see the "Hello World" message.
 
     - Configure your app for deployment with Mangum:
-Install the Mangum library:
+        Install the Mangum library:
 
-Update your main.py file:
+        Update your main.py file:
 
+```python
 from fastapi import FastAPI
 from mangum import Mangum
 
@@ -47,16 +48,22 @@ app = FastAPI()
 def read_root():
     return {"Hello": "World"}
 handler = Mangum(app)
-Install serverless
-npm install serverless
-npm install serverless-python-requirements
-Login into AWS CLI
-aws configure
-Configure requirements.txt file
-pip freeze >> requirements.txt
-Setup a serverless.yml file
-Create a serverless.yml file with following content:
+```
 
+
+    - Install serverless
+```npm install serverless```
+```npm install serverless-python-requirements```
+
+    - Login into AWS CLI
+```aws configure```
+
+    - Configure requirements.txt file
+```pip freeze >> requirements.txt```
+
+    - Setup a serverless.yml file
+        Create a serverless.yml file with following content:
+```
 service: your-service-name
 
 plugins:
@@ -81,5 +88,6 @@ functions:
       - http:
           method: any
           path: /
+```
           
 This should deploy your app to AWS Lambda + API Gateway.
